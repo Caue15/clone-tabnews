@@ -22,7 +22,7 @@ describe("POST /api/v1/sessions", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "email.errado@gmail.com",
+          email: "email.errado@cauertg.com.br",
           password: "senha-correta",
         }),
       });
@@ -41,7 +41,7 @@ describe("POST /api/v1/sessions", () => {
 
     test("With correct `email` but incorrect `password`", async () => {
       await orchestrator.createUser({
-        email: "email.correto@gmail.com",
+        email: "email.correto@cauertg.com.br",
       });
 
       const response = await fetch("http://localhost:3000/api/v1/sessions", {
@@ -50,7 +50,7 @@ describe("POST /api/v1/sessions", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "email.correto@gmail.com",
+          email: "email.correto@cauertg.com.br",
           password: "senha-incorreta",
         }),
       });
@@ -76,7 +76,7 @@ describe("POST /api/v1/sessions", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "email.incorreto@gmail.com",
+          email: "email.incorreto@cauertg.com.br",
           password: "senha-incorreta",
         }),
       });
@@ -95,9 +95,11 @@ describe("POST /api/v1/sessions", () => {
 
     test("With correct `email` and correct `password`", async () => {
       const createUser = await orchestrator.createUser({
-        email: "tudo.correto@gmail.com",
+        email: "tudo.correto@cauertg.com.br",
         password: "tudocorreto",
       });
+
+      await orchestrator.activateUser(createUser);
 
       const response = await fetch("http://localhost:3000/api/v1/sessions", {
         method: "POST",
@@ -105,7 +107,7 @@ describe("POST /api/v1/sessions", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "tudo.correto@gmail.com",
+          email: "tudo.correto@cauertg.com.br",
           password: "tudocorreto",
         }),
       });
