@@ -25,7 +25,7 @@ describe("Use case: Registration Flow (all successful)", () => {
         },
         body: JSON.stringify({
           username: "RegistrationFlow",
-          email: "registration.flow@gmail.com",
+          email: "registration.flow@cauertg.com.br",
           password: "RegistrationFlowPassword",
         }),
       },
@@ -47,8 +47,8 @@ describe("Use case: Registration Flow (all successful)", () => {
   test("Receive activation email", async () => {
     const lastEmail = await orchestrator.getLastEmail();
 
-    expect(lastEmail.sender).toBe("<contato@gmail.com>");
-    expect(lastEmail.recipients[0]).toBe("<registration.flow@gmail.com>");
+    expect(lastEmail.sender).toBe("<contato@cauertg.com.br>");
+    expect(lastEmail.recipients[0]).toBe("<registration.flow@cauertg.com.br>");
     expect(lastEmail.subject).toBe("Ative seu cadastro!");
     expect(lastEmail.text).toContain("RegistrationFlow");
 
@@ -96,7 +96,7 @@ describe("Use case: Registration Flow (all successful)", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "registration.flow@gmail.com",
+          email: "registration.flow@cauertg.com.br",
           password: "RegistrationFlowPassword",
         }),
       },

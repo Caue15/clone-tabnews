@@ -19,7 +19,7 @@ describe("POST /api/v1/users", () => {
         },
         body: JSON.stringify({
           username: "caue15",
-          email: "caue.renatini@gmail.com",
+          email: "caue.renatini@cauertg.com.br",
           password: "senha123",
         }),
       });
@@ -63,7 +63,7 @@ describe("POST /api/v1/users", () => {
         },
         body: JSON.stringify({
           username: "emailduplicado1",
-          email: "duplicado@gmail.com",
+          email: "duplicado@cauertg.com.br",
           password: "senha123",
         }),
       });
@@ -77,7 +77,7 @@ describe("POST /api/v1/users", () => {
         },
         body: JSON.stringify({
           username: "emailduplicado2",
-          email: "Duplicado@gmail.com",
+          email: "Duplicado@cauertg.com.br",
           password: "senha123",
         }),
       });
@@ -102,7 +102,7 @@ describe("POST /api/v1/users", () => {
         },
         body: JSON.stringify({
           username: "usernameduplicado",
-          email: "usernameduplicado1@gmail.com",
+          email: "usernameduplicado1@cauertg.com.br",
           password: "senha123",
         }),
       });
@@ -116,7 +116,7 @@ describe("POST /api/v1/users", () => {
         },
         body: JSON.stringify({
           username: "UsernameDuplicado",
-          email: "usernameduplicado2@gmail.com",
+          email: "usernameduplicado2@cauertg.com.br",
           password: "senha123",
         }),
       });
@@ -148,7 +148,7 @@ describe("POST /api/v1/users", () => {
         },
         body: JSON.stringify({
           username: "usuarioLogado",
-          email: "usuariologado@gmail.com",
+          email: "usuariologado@cauertg.com.br",
           password: "senha123",
         }),
       });

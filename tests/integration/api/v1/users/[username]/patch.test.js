@@ -145,11 +145,11 @@ describe("PATCH /api/v1/users/[username]", () => {
 
     test("With duplicated 'email'", async () => {
       await orchestrador.createUser({
-        email: "email1@gmail.com",
+        email: "email1@cauertg.com.br",
       });
 
       const createdUser2 = await orchestrador.createUser({
-        email: "email2@gmail.com",
+        email: "email2@cauertg.com.br",
       });
 
       const activatedUser2 = await orchestrador.activateUser(createdUser2);
@@ -166,7 +166,7 @@ describe("PATCH /api/v1/users/[username]", () => {
             Cookie: `session_id=${sessionObject2.token}`,
           },
           body: JSON.stringify({
-            email: "email1@gmail.com",
+            email: "email1@cauertg.com.br",
           }),
         },
       );
@@ -236,7 +236,7 @@ describe("PATCH /api/v1/users/[username]", () => {
             Cookie: `session_id=${sessionObject.token}`,
           },
           body: JSON.stringify({
-            email: "uniqueEmail2@gmail.com",
+            email: "uniqueEmail2@cauertg.com.br",
           }),
         },
       );
