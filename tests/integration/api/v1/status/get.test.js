@@ -1,8 +1,10 @@
-import orchestrador from "tests/orchestrator.js";
+import orchestrator from "tests/orchestrator.js";
 import webserver from "infra/webserver.js";
 
 beforeAll(async () => {
-  await orchestrador.waitForAllServices();
+  await orchestrator.waitForAllServices();
+  await orchestrator.clearDatabase();
+  await orchestrator.runPendingMigrations();
 });
 
 describe("GET /api/v1/status", () => {
@@ -24,11 +26,11 @@ describe("GET /api/v1/status", () => {
 
   describe("Privileged user", () => {
     test("With `read:status:all`", async () => {
-      const privilegedUser = await orchestrador.createUser();
+      const privilegedUser = await orchestrator.createUser();
       const activatedPrivilegedUser =
-        await orchestrador.activateUser(privilegedUser);
-      await orchestrador.addFeaturesToUser(privilegedUser, ["read:status:all"]);
-      const privilegedUserSession = await orchestrador.createSession(
+        await orchestrator.activateUser(privilegedUser);
+      await orchestrator.addFeaturesToUser(privilegedUser, ["read:status:all"]);
+      const privilegedUserSession = await orchestrator.createSession(
         activatedPrivilegedUser,
       );
 
