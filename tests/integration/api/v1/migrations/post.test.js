@@ -1,4 +1,5 @@
 import orchestrador from "tests/orchestrator.js";
+import webserver from "infra/webserver.js";
 
 beforeAll(async () => {
   await orchestrador.waitForAllServices();
@@ -8,10 +9,11 @@ beforeAll(async () => {
 
 describe("POST /api/v1/migrations", () => {
   describe("Anonymous user", () => {
-    test("Retrieving pending migrations", async () => {
-      const response = await fetch("http://localhost:3000/api/v1/migrations", {
+    test("Running pending migrations", async () => {
+      const response = await fetch(`${webserver.origin}/api/v1/migrations`, {
         method: "POST",
       });
+
       expect(response.status).toBe(403);
 
       const responseBody = await response.json();
@@ -27,12 +29,12 @@ describe("POST /api/v1/migrations", () => {
   });
 
   describe("Default user", () => {
-    test("Retrieving pending migrations", async () => {
+    test("Running pending migrations", async () => {
       const createdUser = await orchestrador.createUser();
       const activatedUser = await orchestrador.activateUser(createdUser);
-      const sessionObject = await orchestrador.createSession(activatedUser.id);
+      const sessionObject = await orchestrador.createSession(activatedUser);
 
-      const response = await fetch("http://localhost:3000/api/v1/migrations", {
+      const response = await fetch(`${webserver.origin}/api/v1/migrations`, {
         method: "POST",
         headers: {
           Cookie: `session_id=${sessionObject.token}`,
@@ -57,9 +59,9 @@ describe("POST /api/v1/migrations", () => {
       const createdUser = await orchestrador.createUser();
       const activatedUser = await orchestrador.activateUser(createdUser);
       await orchestrador.addFeaturesToUser(createdUser, ["create:migration"]);
-      const sessionObject = await orchestrador.createSession(activatedUser.id);
+      const sessionObject = await orchestrador.createSession(activatedUser);
 
-      const response = await fetch("http://localhost:3000/api/v1/migrations", {
+      const response = await fetch(`${webserver.origin}/api/v1/migrations`, {
         method: "POST",
         headers: {
           Cookie: `session_id=${sessionObject.token}`,
